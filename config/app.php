@@ -140,6 +140,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Bican\Roles\RolesServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,

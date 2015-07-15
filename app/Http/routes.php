@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/acl','Acl@create');
+Route::get('/created','attachRole@create');
+Route::get('/ver/{id}','attachRole@show');
