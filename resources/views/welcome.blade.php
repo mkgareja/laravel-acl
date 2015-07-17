@@ -41,10 +41,10 @@
                 @if (session('status'))
                     <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="false">&times;</button>
-                        {{ session('status') }}
+                    
                     </div>
                 @endif
-                <div class="title">Laravel 5</div>
+                <div class="title">Welcome @if(isset($email)){{ $email }}@endif</div>
             </div>
         </div>
     </body>

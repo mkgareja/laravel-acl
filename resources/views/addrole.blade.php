@@ -19,22 +19,21 @@
 	<body>
 	<div class="container">
 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-		<a class="btn btn-sm btn-default" href="{!! URL::to('/signup')!!}" role="button">Resister</a><br/><br/>
-		{!! Form::open(array('url' => 'authenticate'))!!}
-			<legend>SignIn</legend>
+		{!! Form::open(array('url' => 'saverole' )) !!}
+			<legend>Add role</legend>
+		
 			<div class="form-group">
-				<label for="">Enter Email</label>
-				<input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
+				<label for="">Role</label>
+				<input type="text" class="form-control" id="role" name="role" placeholder="role name" required="required">
 			</div>
 			<div class="form-group">
-				<label for="">Enter Password</label>
-				<input type="text" class="form-control" name="password" id="password" placeholder="Enter Password">
+				<label for="">Role Slug</label>
+				<input type="text" class="form-control" id="role_slug" name="role_slug" placeholder="role slug" required="required">
 			</div>
-
 			<button type="submit" class="btn btn-primary">Submit</button>
 		{!! Form::close() !!}
-	</div>	
-	</div>
+		</div>
+		</div>
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>
 		<!-- Bootstrap JavaScript -->

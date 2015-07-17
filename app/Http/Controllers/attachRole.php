@@ -212,7 +212,7 @@ class attachRole extends Controller
         //echo $user.'skcksdbck';
         if(Auth::attempt($crede))
         {
-            return 'valid user';
+            return view('welcome')->with('email',$email);
         }else
         {
             return 'Enter valid user name and password';

@@ -25,5 +25,8 @@ Route::get('/signup','attachRole@signup');
 Route::get('/signin',function() {
 	return view('login');
 });
+Route::get('/saverole',function(){
+	return view('addrole');
+});
 Route::post('/save','attachRole@saveuser');
 Route::post('/authenticate','attachRole@authenticate');

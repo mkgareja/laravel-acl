@@ -19,6 +19,7 @@
 	<body>
 	<div class="container">
 		<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+			<a class="btn btn-sm btn-default" href="{!! URL::to('/signin')!!}" role="button">Login</a><br/><br/>
 			{!! Form::open(array('url' => 'save' )) !!}
 				<legend>Signup</legend>
 			
