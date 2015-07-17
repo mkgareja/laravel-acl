@@ -30,6 +30,14 @@
 				<label for="">Role Slug</label>
 				<input type="text" class="form-control" id="role_slug" name="role_slug" placeholder="role slug" required="required">
 			</div>
+			<div class="form-group">
+				<label for="">Enter Level</label>
+				<select name="level" id="level" class="form-control">
+				@for($i=0; $i <= 10; $i++)
+					<option value="{{ $i }}">{{ $i }}</option>
+				@endfor
+				</select>
+			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		{!! Form::close() !!}
 		</div>

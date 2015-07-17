@@ -225,5 +225,14 @@ class attachRole extends Controller
         // {
         //     return 'Enter valid user name and password';
         // }
+    }
+    public function saverole(Request $request)
+    {
+        $role=new Role();
+        $role->name = $request->input('role');
+        $role->slug = $request->input('role_slug');
+        $role->level = $request->input('level');
+        $role->save();
+        return view('welcome');
     }    
 }

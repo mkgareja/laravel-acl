@@ -30,6 +30,7 @@
 				<label for="">Enter Password</label>
 				<input type="text" class="form-control" name="password" id="password" placeholder="Enter Password">
 			</div>
+			
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		{!! Form::close() !!}
