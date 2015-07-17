@@ -18,3 +18,12 @@ Route::get('/', function () {
 Route::get('/acl','Acl@create');
 Route::get('/created','attachRole@create');
 Route::get('/ver/{id}','attachRole@show');
+Route::get('/createper','attachRole@store');
+Route::get('/per/{id}','attachRole@edit');
+Route::get('/valid/{id}','attachRole@validrole');
+Route::get('/signup','attachRole@signup');
+Route::get('/signin',function() {
+	return view('login');
+});
+Route::post('/save','attachRole@saveuser');
+Route::post('/authenticate','attachRole@authenticate');

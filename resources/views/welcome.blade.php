@@ -38,6 +38,12 @@
     <body>
         <div class="container">
             <div class="content">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="false">&times;</button>
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <div class="title">Laravel 5</div>
             </div>
         </div>
