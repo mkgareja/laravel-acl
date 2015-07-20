@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use Hash;
+use View;
 use App\User;
 use Bican\Roles\Models\Role;
 use Illuminate\Http\Request;
@@ -27,110 +28,29 @@ class attachRole extends Controller
         //return $role;
         return view('signup')->with('role',$role);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        $user = new User();
-        $user->name ='normal';
-        $user->email = 'normal@gmail.com';
-        $user->password ='normal';
-        $user->save();
-        return view('welcome');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store()
-    {
-        $createUsersPermission = Permission::create([
-                'name' => 'Create users',
-                'slug' => 'create.users',
-                'description' => '', // optional
-            ]);
-        $deleteUsersPermission = Permission::create([
-                'name' => 'Delete users',
-                'slug' => 'delete.users',
-            ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        $user = User::find($id);
-     
-        
-        $user->attachRole('3');
-            //return $user->is('admin');
-        //return view('view')->with('user',$user);
-        if ($user->hasRole('forum.moderator')) { // you can pass an id or slug
-            return 'admin';
-        }else {
-            return 'not admin';
-        }
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return Response
      */
-    public function edit($roleId)
+    //this method use for give permition to role.
+    public function savepermition_role(Request $request)
     {
-        //role admin id 3
-        $allUsersPermission = Permission::create([
-                'name' => 'all Create users',
-                'slug' => 'all.create.users',
-                'description' => 'all permition', // optional
-            ]);
-        $role = Role::find($roleId);
-        $role->attachPermission($allUsersPermission); 
+        $roleid = $request->input('role');
+        $permitionid = $request->input('permition');
+        $role = Role::find($roleid);
+        $role->attachPermission($permitionid);
+        return view('welcome'); 
     }
-    public function validrole($roleId)
+    //this method use for give new peermition to user
+    public function savepermition_user(Request $request)
     {
-        // $deleteUsersPermission = Permission::create([
-        //     'name' => 'all.Delete users',
-        //     'slug' => 'all.delete.users',
-        // ]);
-        // $user = User::find($roleId);
-        // $user->attachPermission($deleteUsersPermission); 
-        $per = User::find($roleId);
-        //return $per;
-        if($per->can('create.users'))
-        {
-            return 'all permition'; 
-        }
-        else
-        {
-            return 'not all permition';    
-        }
-   
-
-    }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        
+        $userid = $request->input('user');
+        $permitionid = $request->input('permition');
+        $role = User::find($userid);
+        $role->attachPermission($permitionid);
+        return view('welcome'); 
     }
 
     /**
@@ -139,6 +59,7 @@ class attachRole extends Controller
      * @param  int  $id
      * @return Response
      */
+    //this method use for add new user with role.
     public function saveuser(Request $request)
     {
         $user = new User();
@@ -192,13 +113,6 @@ class attachRole extends Controller
         //$status='Data inserted Successfull!!!!';
         
     }
-    // public function up()
-    // {
-    //     $user = User::find(39);
-    //     $user->password = Hash::make('mahesh');
-    //     $user->save();
-    //     return 'saved';
-    // }
     public function authenticate(Request $request)
     {
         //$user = Auth::user();
@@ -215,7 +129,9 @@ class attachRole extends Controller
             return view('welcome')->with('email',$email);
         }else
         {
-            return 'Enter valid user name and password';
+            //return                                                                                                                                                            
+            $alert='Enter valid user name and password';
+            return view('welcome')->with('alert',$alert);
         }
 
         // if($request->user())
@@ -226,6 +142,7 @@ class attachRole extends Controller
         //     return 'Enter valid user name and password';
         // }
     }
+    //this method use for creating new role
     public function saverole(Request $request)
     {
         $role=new Role();
@@ -234,5 +151,38 @@ class attachRole extends Controller
         $role->level = $request->input('level');
         $role->save();
         return view('welcome');
+    } 
+    //this method use to create new permition
+    public function savepermition(Request $request)
+    {
+        $createUsersPermission = Permission::create([
+                'name' => $request->input('permition'),
+                'slug' => $request->input('permition_slug'),
+                'description' => '', // optional
+            ]);
+        return view('welcome');
+        // $role=new Permission();
+        // $role->name = $request->input('permition');
+        // $role->slug = $request->input('permition_slug');
+        // $role->level = $request->input('level');
+        // $role->save();
+        // return view('welcome');
+    }
+    //this method is use for add permition to the particular role.
+    public function view_addper_role()
+    {
+      $role = Role::all();
+      $permition = Permission::all();
+      return view('/add_role_permition', compact('role', 'permition'));
+      //return view('/add_role_permition')->with('role,permition','$role,$permition);
+
+    }
+    //this method use for adding permition to particilar user.
+    public function view_addper_user()
+    {
+      $user = User::all();
+      $permition = Permission::all();
+      return view('/add_user_permition', compact('user', 'permition'));
+      //return view('/add_user_permition')->with('user',$user);
     }    
 }
