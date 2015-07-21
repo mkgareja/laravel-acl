@@ -7,11 +7,11 @@
 			
 				<div class="form-group">
 					<label for="">Enter Name</label>
-					<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" required="required">
+					<input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" required="required" value="{{ old('name') }}">
 				</div>
 				<div class="form-group">
 					<label for="">Enter Email</label>
-					<input type="text" class="form-control" name="email" id="email" placeholder="Enter email" required="required">
+					<input type="text" class="form-control" name="email" id="email" placeholder="Enter email" required="required" value="{{ old('email') }}">
 				</div> 
 				<div class="form-group">
 					<label for="">Enter Password</label>

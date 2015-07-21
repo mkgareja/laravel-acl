@@ -47,12 +47,16 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{!! URL::to('/signin') !!}">Login</a></li>
-                    <li><a href="{!! URL::to('/signup') !!}">Signup</a></li>
+                    
+                    @if(Auth::check())
                     <li><a href="{!! URL::to('/addrole') !!}">Addrole</a></li>
                     <li><a href="{!! URL::to('/addper') !!}">AddPermition</a></li>
                     <li><a href="{!! URL::to('/addper_user') !!}">Add Permition to user</a></li>
                     <li><a href="{!! URL::to('/addper_role') !!}">Add permition to role</a></li>
+                    @else
+                    <li class="active"><a href="{!! URL::to('/signin') !!}">Login</a></li>
+                    <li><a href="{!! URL::to('/signup') !!}">Signup</a></li>
+                    @endif
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
@@ -61,7 +65,10 @@
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    @if(Auth::check())<li><a href="{!! URL::to('/logout') !!}">Logout</a></li>@endif
+                    @if(Auth::check())
+                    <li><a href="">Welcom {{ Auth::user()->name }}</a></li>
+                    <li><a href="{!! URL::to('/logout') !!}">Logout</a></li>
+                    @endif
                     {{-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -74,7 +81,23 @@
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
+
         <div class="container">
+         @if($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                            ×</button>
+                        <p>
+                           {{ $error }}
+                        </p>
+                    </div>
+                {{-- <div class="alert alert-error">
+                    <a class="close" data-dismiss="alert">&times;</a>
+                    
+                </div> --}}
+             @endforeach
+        @endif
         @yield('main_container')
         </div>
 

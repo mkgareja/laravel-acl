@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use View;
+use Session;
+use Validator;
 use App\User;
 use Bican\Roles\Models\Role;
 use Illuminate\Http\Request;
@@ -62,6 +64,16 @@ class attachRole extends Controller
     //this method use for add new user with role.
     public function saveuser(Request $request)
     {
+        $v = Validator::make($request->all(),
+            [
+              'name' => 'required|min:5',
+              'email' => 'required|email',
+              'password' => 'required'
+            ]);
+        if($v->fails())
+        {
+          return redirect ('/signup')->withErrors($v)->withInput();
+        }
         $user = new User();
         $user->name = $request->input('name');
         $user->email = $request->input('email');
@@ -115,7 +127,17 @@ class attachRole extends Controller
     }
     public function authenticate(Request $request)
     {
-        //$user = Auth::user();
+      $validatore = Validator::make($request->all(),
+        [
+          'email' => 'required|email',
+          'password' => 'required'
+        ]
+        );
+      if($validatore->fails())
+      {
+        return redirect('/signin')->withErrors($validatore)->withInput();
+      }
+      //$user = Auth::user();
       $email=$request->input('email');
       $password=$request->input('password');
       $crede = array(
@@ -124,8 +146,22 @@ class attachRole extends Controller
                     );
         //$user=Auth::attempt(['email' => $request->email, 'password' => $request->password]);
         //echo $user.'skcksdbck';
+
         if(Auth::attempt($crede))
         {
+            // echo "<pre>";
+            // print_r(Auth::user());exit();
+            // $data['data1']='data1';
+            // $data['data2']='data2';
+            // //Session::put('session_pass','password');
+            // $email = 
+            // Session::put('email',$email);
+
+           
+
+            //print_r(session::get('data'));
+            //$request->session()->put('key', 'value');
+            //$request->session()->get('mahesh', 'gareja');
             return view('welcome')->with('email',$email);
         }else
         {
@@ -133,6 +169,7 @@ class attachRole extends Controller
             $alert='Enter valid user name and password';
             return view('welcome')->with('alert',$alert);
         }
+
 
         // if($request->user())
         // {

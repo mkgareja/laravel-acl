@@ -6,7 +6,7 @@
 			<legend>SignIn</legend>
 			<div class="form-group">
 				<label for="">Enter Email</label>
-				<input type="text" class="form-control" name="email" id="email" placeholder="Enter email">
+				<input type="text" class="form-control" name="email" id="email" placeholder="Enter email" value="{{ old('email') }}">
 			</div>
 			<div class="form-group">
 				<label for="">Enter Password</label>
