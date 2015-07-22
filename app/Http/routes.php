@@ -30,16 +30,15 @@ Route::post('/save','attachRole@saveuser');
 Route::post('/authenticate','attachRole@authenticate');
 //add role
 
-Route::get('/addrole',function() {
-	return view('addrole');
-});
+Route::get('/addrole','attachRole@addrole');
 Route::get('/logout',function() {
 	Auth::logout();
 	return view('welcome');
 });
-Route::get('/addper',function() {
-	return view('add_permition');
-});
+Route::get('/addper','attachRole@addper');
+// 	function() {
+// 	return view('add_permition');
+// });
 //save permition
 Route::post('/savepermition','attachRole@savepermition');
 //view add permition to role and user

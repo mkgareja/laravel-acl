@@ -221,5 +221,17 @@ class attachRole extends Controller
       $permition = Permission::all();
       return view('/add_user_permition', compact('user', 'permition'));
       //return view('/add_user_permition')->with('user',$user);
+    }
+    public function addrole()
+    {
+      $role = Role::all();
+      return view('/addrole', compact('role'));
+      //return view('/add_user_permition')->with('user',$user);
+    } 
+    public function addper()
+    {
+      $per = Permission::all();
+      return view('/add_permition', compact('per'));
+      //return view('/add_user_permition')->with('user',$user);
     }    
 }

@@ -1,6 +1,25 @@
 @extends('template')
 @section('main_container')
 	<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+	<legend>Roles</legend>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Role Id</th>
+				<th>Role Name</th>
+				<th>Role Slug</th>
+			</tr>
+		</thead>
+		<tbody>
+		@foreach ($role as $role)
+			<tr>
+				<td>{{ $role->id }}</td>
+				<td>{{ $role->name}}</td>
+				<td>{{ $role->slug}}</td>
+			</tr>
+		@endforeach
+		</tbody>
+	</table>
 		{!! Form::open(array('url' => 'saverole' )) !!}
 			<legend>Add role</legend>
 		
